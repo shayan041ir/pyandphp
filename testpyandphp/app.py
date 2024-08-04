@@ -8,31 +8,17 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# بررسی وجود پوشه آپلود و ایجاد آن در صورت عدم وجود
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 def process_image(filepath):
-  model = Model.load("hezarai/crnn-fa-license-plate-recognition")
-  plate_text = model.predict(filepath)
-  sli=slice(11,-3)
-  numberOfPlate=str(plate_text)[sli]
-  Pnumbers=['۱','۲','۳','۴','۵','۶','۷','۸','۹','۰']
-  Enumbers=['1','2','3','4','5','6','7','8','9','0',]
-  numberOfPlateEnglish=""
-  Pcount=0
-  count=0
-  
-  for i in numberOfPlate:
-    for j in Pnumbers:
-        if i==j:
-           numberOfPlateEnglish+=str(Enumbers[count])
-           break
-        count+=1
-    Pcount+=1
-    if Pcount==3:
-        numberOfPlateEnglish+=i
-    count=0
-  return numberOfPlateEnglish#returns string
+    model = Model.load("hezarai/crnn-fa-license-plate-recognition")
+    plate_text = model.predict(filepath)
+    sli=slice(11,-3)
+    numberOfPlate=str(plate_text)[sli]
+    return numberOfPlate#returns string
+
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
