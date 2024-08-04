@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>آپلود فایل</title>
     <style>
-        /* استایل برای بدنه صفحه */
         body {
             font-family: Arial, sans-serif;
             background-color: #333;
@@ -16,7 +15,6 @@
             align-items: center;
             height: 100vh;
         }
-        /* استایل برای کانتینر فرم آپلود */
         .container {
             background-color: #fff;
             padding: 20px;
@@ -26,12 +24,10 @@
             width: 100%;
             text-align: center;
         }
-        /* استایل برای تگ h1 */
         h1 {
             margin-bottom: 20px;
             color: #333;
         }
-        /* استایل برای ورودی‌های فرم */
         input[type="file"], input[type="text"], input[type="submit"] {
             width: 80%;
             padding: 10px;
@@ -39,26 +35,18 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        /* استایل برای دکمه ارسال */
         input[type="submit"] {
             background-color: #007bff;
             color: #fff;
             border: none;
             cursor: pointer;
         }
-        /* استایل برای دکمه ارسال در حالت hover */
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
-        /* استایل برای پیام خطا و موفقیت */
         .message {
             margin: 10px 0;
-            color: #d9534f;
         }
-        .success {
-            color: #5cb85c;
-        }
-        /* استایل برای لینک بازگشت */
         .back-link {
             display: block;
             margin-top: 20px;
@@ -68,10 +56,16 @@
         .back-link:hover {
             text-decoration: underline;
         }
-        /* استایل برای دیو متن */
         .info-text {
+            border: 1px solid #ccc;
             margin-top: 20px;
             color: #666;
+            padding: 10px;
+        }
+        .char {
+            display: inline-block;
+            margin: 0 2px;
+            color: green;
         }
     </style>
 </head>
@@ -102,19 +96,30 @@
             // نمایش پاسخ
             $result = json_decode($response, true);
             if (isset($result['result']) && isset($result['filename'])) {
-                echo "<div class='message success'>{$result['result']}</div>";
+                echo "<div class='message' style='color: green;'>فایل آپلود شد.</div>";
             } else {
-                echo "<div class='message'>خطا در آپلود فایل.</div>";
+                echo "<div class='message' style='color: red;'>خطا در آپلود فایل.</div>";
             }
         }
         ?>
+        <!-- فرم HTML برای آپلود فایل -->
         <form action="" method="POST" enctype="multipart/form-data">
-            <input type="file" name="uploaded_file" required> 
-            <input type="submit" value="آپلود"> 
+            <input type="file" name="uploaded_file" required> <!-- ورودی انتخاب فایل -->
+            <input type="submit" value="آپلود"> <!-- دکمه ارسال -->
         </form>
 
+        <!-- دیو متن -->
         <div class="info-text">
-            <?php echo "<div class='message'>نام فایل: {$result['filename']}</div>";?>
+            <h2>پلاک</h2>
+            <?php
+            if (isset($result['result']) && isset($result['filename'])) {
+                foreach (mb_str_split($result['result'], 1, 'UTF-8') as $char) {
+                    echo "<span class='char'>$char</span>";
+                }
+            } else {
+                echo "<div class='message success' style='color: red;'>خوانده نشد.</div>";
+            }
+            ?>
         </div>
     </div>
 </body>
