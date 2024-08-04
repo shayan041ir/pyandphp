@@ -13,9 +13,11 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 def process_image(filepath):
-    model = Model.load("hezarai/crnn-fa-license-plate-recognition")
-    plate_text = model.predict(filepath)
-    return plate_text
+ model = Model.load("hezarai/crnn-fa-license-plate-recognition")
+ plate_text = model.predict(filepath)
+ sli=slice(11,-3)
+ numberOfPlate=str(plate_text)[sli]
+ return numberOfPlate#returns string
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
