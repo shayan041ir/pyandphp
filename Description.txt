@@ -19,6 +19,8 @@ pip install pipenv
 
 نصب وابستگی‌ها:
 
+install xampp and on mysql and apache
+
 [packages]
 hezar = {extras = ["all"], version = "*"}
 torch = "==2.0.0"
@@ -31,24 +33,12 @@ jsonify = "*"
 python_version = "3.11"
 
 
-
-
-
 2. فایل app.py
-این فایل شامل کدهای مربوط به سرور Flask است که به شرح زیر است:
-
-
-
 
 3. فایل upload.php
-این فایل شامل کدهای PHP برای ایجاد فرم آپلود فایل و ارسال آن به سرور Flask است:
-
-
 
 4. اجرای پروژه
 برای اجرای این پروژه، مراحل زیر را دنبال کنید:
-
-
 
 راه‌اندازی سرور Flask:
 
