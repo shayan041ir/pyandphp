@@ -16,7 +16,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 def process_image(filepath):
     image=Image.open(filepath)
     higit,withd=image.size
-    crop=(int(withd*0.2),int(higit*0.6),withd,higit-int(higit*0.1))
+    crop=(int(withd*0.15),int(higit*0.25),withd-int(withd*0.15),higit-int(higit*0.25))
     Cimage=image.crop(crop)#left, up, right, down
     model = Model.load("hezarai/crnn-fa-license-plate-recognition")
     plate_text = model.predict( Cimage)
