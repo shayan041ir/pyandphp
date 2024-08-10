@@ -1,8 +1,7 @@
 from flask import Flask, request, jsonify
 import os
-import PIL
 from hezar.models import Model
-from PIL import Image
+
 app = Flask(__name__)
 
 # مسیر پوشه آپلود
@@ -14,12 +13,8 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 def process_image(filepath):
-    image=Image.open(filepath)
-    higit,withd=image.size
-    crop=(int(withd*0.15),int(higit*0.25),withd-int(withd*0.15),higit-int(higit*0.25))
-    Cimage=image.crop(crop)#left, up, right, down
     model = Model.load("hezarai/crnn-fa-license-plate-recognition")
-    plate_text = model.predict( Cimage)
+    plate_text = model.predict(filepath)
     sli=slice(11,-3)
     numberOfPlate=str(plate_text)[sli]
     return numberOfPlate#returns string
