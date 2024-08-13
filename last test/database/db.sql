@@ -1,0 +1,4 @@
+CREATE TABLE pelaks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    plak VARCHAR(50) NOT NULL
+);

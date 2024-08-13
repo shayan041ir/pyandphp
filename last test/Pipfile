@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+hezar = {extras = ["all"], version = "*"}
+torch = "==2.0.0"
+cmake = "*"
+flask = "*"
+numpy = "*"
+pytest = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
