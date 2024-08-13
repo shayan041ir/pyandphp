@@ -100,7 +100,7 @@
             }
 
             if (empty($errors)) {
-                $upload_dir = "upload/img/nemayedakheli/";
+                $upload_dir = "upload";
                 if (!is_dir($upload_dir)) {
                     mkdir($upload_dir, 0755, true);
                 }
